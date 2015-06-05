@@ -1,0 +1,34 @@
+<template name="restuarant_category">
+  <p>
+      <button type="button" class="btn btn-primary insert">{{fa "plus"}} Add New</button>
+  </p>
+
+  {{> tabular table=Restuarant.TabularTable.FoodCategory class="table table-striped table-bordered table-condensed table-hover"}}
+
+</template>
+
+<template name="restuarant_category_form_insert">
+  {{> quickForm collection="Restuarant.Collection.FoodCategory" id="restuarant_category_form_insert" type="insert"}}
+</template>
+
+<!--Action-->
+<template name="restuarant_categoryAction">
+    {{#tabularAction}}
+        <li><a href="#" class="update">{{fa "pencil"}} Update</a></li>
+        <li><a href="#" class="remove">{{fa "remove"}} Remove</a></li>
+        <li><a href="#" class="show">{{fa "eye"}} Show</a></li>
+    {{/tabularAction}}
+</template>
+
+<template name="restuarant_category_form_update">
+  {{> quickForm collection="Restuarant.Collection.FoodCategory" doc=this id="restuarant_category_form_update" type="update"}}
+</template>
+
+<template name="show_category">
+  <dl class="dl-horizontal">
+      <dt>ID:</dt>
+      <dd>{{_id}}</dd>
+      <dt>Name:</dt>
+      <dd>{{name}}</dd>
+  </dl>
+</template>

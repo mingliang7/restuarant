@@ -1,3 +1,7 @@
 Meteor.publish 'restuarant_order_table', ->
   if @userId
-    return Restuarant.Collection.OrderTable.find()
+    Restuarant.Collection.OrderTable.find()
+
+Meteor.publish 'restuarant_food_category', ->
+  if @userId
+    Restuarant.Collection.FoodCategory.find()
