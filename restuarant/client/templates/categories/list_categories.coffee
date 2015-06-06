@@ -1,12 +1,16 @@
-Template.list_categories.helpers
+Template.restuarant_showOrder.helpers
 	categories: () ->
-		Restuarant.Collection.FoodCategory.find()
+		lists = []
+		increment = 0
+		restuarants = Restuarant.Collection.FoodCategory.find()
+		restuarants.forEach (category) ->
+			category.number = increment
+			increment++
+			lists.push category
+		lists
 
-Template.list_categories.events
-	'click .category': () ->
-		product_list = []
-		products = Restuarant.Collection.Product.find {category: @_id}
-		products.forEach (product) ->
-			product_list.push product.name
-
-		alert product_list.join(', ')
+	isZero: (number) ->
+ 		number is 0
+Template.restuarant_showOrder.helpers
+		products: (category_id)->
+			Restuarant.Collection.Product.find {category: category_id}

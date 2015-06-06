@@ -8,10 +8,11 @@ Restuarant.Schema.Product = new SimpleSchema(
 	price:
 		type: Number
 		max: 20
+		decimal: true
 
 	category:
 		type: [String]
-		autoform: 
+		autoform:
 			type: 'select2'
 			options: ->
 				list = []
@@ -22,5 +23,3 @@ Restuarant.Schema.Product = new SimpleSchema(
 )
 
 Restuarant.Collection.Product.attachSchema Restuarant.Schema.Product
-
-

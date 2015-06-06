@@ -6,14 +6,57 @@
   </div>
   <div class="col-md-12">
     <div class="clear-top"></div>
-    <div class="col-md-6">
+    <div class="col-md-12">
+      <head>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+</head>
+
       <div class="row">
-        {{> list_categories}}
-      </div> <!-- end row !-->
-    </div> <!-- end col-md-6 !-->
-  </div>
+                    <div class="col-md-12" data-wow-delay="0.2s">
+                        <div class="carousel slide" data-ride="carousel" id="quote-carousel">
+                            <!-- Bottom Carousel Indicators -->
+                            <ol class="carousel-indicators">
+                              {{#each categories}}
+                                  <li data-target="#quote-carousel" data-slide-to="{{number}}" class="{{#if isZero number}}active{{/if}}">
+                                  {{name}}
+                                    <!-- <img class="img-responsive " src="https://s3.amazonaws.com/uifaces/faces/twitter/brad_frost/128.jpg" alt=""> -->
+                                   </li>
+                              {{/each}}
+                            </ol>
+                            <!-- Carousel Slides / Quotes !-->
+                            <div class="clear-fix"></div>
+                            <div class="carousel-inner text-center">
+                                <!-- Quote 1 !-->
+                                {{#each categories}}
+                                <div class="item {{#if isZero number}}active{{/if}}">
+                                    <blockquote>
+                                        <div class="row">
+                                            <div class="col-md-8 col-sm-offset-2">
+                                              <div class="row pull-left">
+                                                <ul class="ds-btn">
+                                              {{#each products _id}}
+                                              <li><a href="#" class="btn btn-lg btn-primary"><i class="fa fa-list pull-left"></i><span>{{name}}<br>
+                                                <small style="color: #fff;">Price: ${{price}}</small></span></a></li>
+                                              {{/each}}
+                                            </ul>
+                                            </div>
+                                        </div>
+                                      </div>
+                                    </blockquote>
+                                  </div>
+                                  {{/each}}
+                              </div>
+
+                            <!-- Carousel Buttons Next/Prev -->
+                            <a data-slide="prev" href="#quote-carousel" class="left carousel-control"><i class="fa fa-chevron-left"></i></a>
+                            <a data-slide="next" href="#quote-carousel" class="right carousel-control"><i class="fa fa-chevron-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+<hr class="divider"/>
+    </div> <!-- end col-md-12 !-->
   <div class="col-md-12">
-   <div class="clear-top"></div> 
+   <div class="clear-top"></div>
       <div class="col-md-7">
   <ul class="timeline">
       <li>
@@ -101,7 +144,5 @@
   </div>
 </div>
 </div>
+</div>
 </template>
-
-
-
