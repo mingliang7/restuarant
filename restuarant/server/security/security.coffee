@@ -9,3 +9,9 @@ Restuarant.Collection.FoodCategory.permit([
   'update'
   'remove'
 ]).restuarant_ifGeneral().apply()
+
+Restuarant.Collection.Product.permit([
+	'insert'
+	'update'
+	'remove'
+]).restuarant_ifGeneral().apply()

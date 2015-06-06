@@ -32,3 +32,14 @@ Router.route 'restuarant/categories',
     title: 'Category'
     sub: ''
     icon: 'file-text-o'
+
+Router.route 'restuarant/products',
+  ->
+    @render 'restuarant_product'
+
+  name: 'restuarant.product'
+  header:
+    title: 'Product'
+    sub: ''
+    icon: 'file-text-o'
+    

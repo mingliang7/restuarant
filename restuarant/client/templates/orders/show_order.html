@@ -4,24 +4,16 @@
     <div class="col-md-4 orang-bg" align="center" ><h4><i class="fa fa-tablet"></i> Table #{{this.name}} </h4></div>
     <div class="col-md-4"></div>
   </div>
-  <div class="clear-fix"></div>
   <div class="col-md-12">
-  <div class="col-md-6">
-  <div class="row">
-    <div class="col-md-2">
-      <button class="btn btn-success">Drinks</button>
-    </div>
-    <div class="col-md-2">
-      <button class="btn btn-success">Drinks</button>
-    </div>
-    <div class="col-md-2">
-      <button class="btn btn-success">Drinks</button>
-    </div>
-    </div>
- </div>
+    <div class="clear-top"></div>
+    <div class="col-md-6">
+      <div class="row">
+        {{> list_categories}}
+      </div> <!-- end row !-->
+    </div> <!-- end col-md-6 !-->
   </div>
-  <div class="clear-top"></div>   
   <div class="col-md-12">
+   <div class="clear-top"></div> 
       <div class="col-md-7">
   <ul class="timeline">
       <li>
@@ -110,3 +102,6 @@
 </div>
 </div>
 </template>
+
+
+

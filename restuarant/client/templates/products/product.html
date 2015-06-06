@@ -1,0 +1,25 @@
+<template name="restuarant_product">
+ 	<p>
+      <button type="button" class="btn btn-primary insert">{{fa "plus"}} Add New</button>
+  </p>
+
+  {{> tabular table=Restuarant.TabularTable.Product class="table table-striped table-bordered table-condensed table-hover"}}
+
+</template> <!-- end restuarant_product -->
+
+<template name="restuarant_product_form_insert">
+	{{#autoForm collection="Restuarant.Collection.Product" id="restuarant_product_form_insert" type="insert"}}
+		{{> afQuickField name="name"}}
+		{{> afQuickField name="price"}}
+		{{> afQuickField name="category" type="select2" multiple=true}}
+		<button type="submit" class="btn btn-primary">Save</button>
+	{{/autoForm}}
+</template> <!-- end  restuarant_product_form_insert-->
+
+<template name="restuarant_productAction">
+    {{#tabularAction}}
+        <li><a href="#" class="update">{{fa "pencil"}} Update</a></li>
+        <li><a href="#" class="remove">{{fa "remove"}} Remove</a></li>
+        <li><a href="#" class="show">{{fa "eye"}} Show</a></li>
+    {{/tabularAction}}
+</template>
