@@ -12,7 +12,7 @@
 </head>
 
       <div class="row">
-                    <div class="col-md-12" data-wow-delay="0.2s">
+                    <div class="col-md-12">
                         <div class="carousel slide" data-ride="carousel" id="quote-carousel">
                             <!-- Bottom Carousel Indicators -->
                             <ol class="carousel-indicators">
@@ -31,12 +31,12 @@
                                 <div class="item {{#if isZero number}}active{{/if}}">
                                     <blockquote>
                                         <div class="row">
-                                            <div class="col-md-8 col-sm-offset-2">
+                                            <div class="col-md-12">
                                               <div class="row pull-left">
                                                 <ul class="ds-btn">
                                               {{#each products _id}}
-                                              <li><a href="#" class="btn btn-lg btn-primary"><i class="fa fa-list pull-left"></i><span>{{name}}<br>
-                                                <small style="color: #fff;">Price: ${{price}}</small></span></a></li>
+                                              <li><a href="#" class="btn btn-lg btn-primary product">{{name}}<br>
+                                                <small style="color: #fff;">Price: ${{price}}</small></a></li>
                                               {{/each}}
                                             </ul>
                                             </div>
@@ -55,9 +55,12 @@
                 </div>
 <hr class="divider"/>
     </div> <!-- end col-md-12 !-->
+  </div>
+    <div class="clear-top"></div>
+    <section>
   <div class="col-md-12">
-   <div class="clear-top"></div>
-      <div class="col-md-7">
+
+<div class="col-md-7">
   <ul class="timeline">
       <li>
         <div class="timeline-badge danger"><i class="fa fa-credit-card"></i></div>
@@ -103,7 +106,7 @@
     								<td class="text-center">1</td>
     								<td class="text-right">$10.99</td>
     							</tr>
-                                <tr>
+                  <tr>
         							<td>BS-400</td>
     								<td class="text-center">$20.00</td>
     								<td class="text-center">3</td>
@@ -144,5 +147,6 @@
   </div>
 </div>
 </div>
-</div>
+</section>
+<div class="clear-top"></div>
 </template>

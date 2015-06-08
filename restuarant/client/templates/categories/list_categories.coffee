@@ -1,3 +1,4 @@
+@Obj = []
 Template.restuarant_showOrder.helpers
 	categories: () ->
 		lists = []
@@ -14,3 +15,18 @@ Template.restuarant_showOrder.helpers
 Template.restuarant_showOrder.helpers
 		products: (category_id)->
 			Restuarant.Collection.Product.find {category: category_id}
+
+Template.restuarant_showOrder.events
+	'click .product': ->
+		current = @
+		Obj.push @
+		Obj.forEach (product) ->
+			if current.name is product.name
+				if product.amount is undefined
+					product.amount = 1
+				else
+					product.amount += 1
+					Obj.pop(current)
+
+			else if product.amount is undefined
+				product.amount = 1

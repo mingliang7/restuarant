@@ -29,6 +29,12 @@
     margin-right: -19px;
     margin-bottom: 5%;
 }
+ol.carousel-indicators {
+  width: 100%;
+  width: 500px;
+  height: 100px;
+  z-index: 999;
+}
 #quote-carousel .carousel-indicators li {
     width: 65%;
     background: none;
@@ -53,6 +59,10 @@
 }
 .carousel-inner {
     min-height: 300px;
+    z-index: 99
+}
+.item{
+  margin-top: 60px;
 }
 .item blockquote {
     border-left: none;
@@ -62,12 +72,9 @@
     content: "\f10d";
     font-family: 'Fontawesome';
     float: left;
-    margin-right: 10px;
+    padding: 10px;
 }
-
-
-@media screen and (max-width: 1000px) {
-  #quote-carousel .carousel-indicators li {
-    display: none;
-  }
+.row {
+  margin-left: -20px;
+  margin-right: -20px;
 }
