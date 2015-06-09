@@ -24,9 +24,16 @@ Template.restuarant_showOrder.events
 			if current.name is product.name
 				if product.amount is undefined
 					product.amount = 1
+					product.total_unit_price = product.price
+
 				else
 					product.amount += 1
+					product.total_unit_price += product.price
 					Obj.pop(current)
-
 			else if product.amount is undefined
 				product.amount = 1
+				product.total_unit_price += product.price
+		Session.set 'products', Obj
+Template.restuarant_showOrder.helpers
+	temp_invoice: ->
+		Session.get  'products'
