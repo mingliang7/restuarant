@@ -1,4 +1,5 @@
 @Obj = []
+@Products = {}
 Template.restuarant_showOrder.helpers
 	categories: () ->
 		lists = []
@@ -16,24 +17,30 @@ Template.restuarant_showOrder.helpers
 		products: (category_id)->
 			Restuarant.Collection.Product.find {category: category_id}
 
-Template.restuarant_showOrder.events
-	'click .product': ->
-		current = @
-		Obj.push @
-		Obj.forEach (product) ->
-			if current.name is product.name
-				if product.amount is undefined
-					product.amount = 1
-					product.total_unit_price = product.price
-
-				else
-					product.amount += 1
-					product.total_unit_price += product.price
-					Obj.pop(current)
-			else if product.amount is undefined
-				product.amount = 1
-				product.total_unit_price += product.price
-		Session.set 'products', Obj
 Template.restuarant_showOrder.helpers
 	temp_invoice: ->
-		Session.get  'products'
+		arr = []
+		products = Session.get 'products'
+		for k,v of products
+			arr.push v
+		console.log arr
+		arr
+Template.restuarant_showOrder.events
+	'click .product': ->
+		Products["#{@_id}"] =
+				'_id': @_id
+				'name': @name
+				'price': @price
+				'amount':
+					if @amount is undefined
+						@amount = 1
+					else
+						@amount += 1
+				'total_unit_price': @amount * @price
+		Session.set 'products', Products
+
+	'click .delete': ->
+		currentProduct  = @
+		delete Products[currentProduct._id]
+		console.log Products
+		Session.set 'products', Products
