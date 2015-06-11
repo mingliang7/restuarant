@@ -9,3 +9,6 @@ Meteor.publish 'restuarant_food_category', ->
 Meteor.publish 'restuarant_product', ->
 	if @userId
 		Restuarant.Collection.Product.find()
+
+Meteor.publish 'restuarant_temp_product', ->
+	Restuarant.Collection.TempProduct.find() if @userId

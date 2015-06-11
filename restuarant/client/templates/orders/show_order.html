@@ -110,23 +110,17 @@
       							</tr>
                   {{/each}}
     							<tr>
-    								<td class="thick-line"></td>
-    								<td class="thick-line"><strong>Subtotal</strong></td>
-    								<td class="thick-line text-center"></td>
-    								<td class="thick-line text-right">$670.99</td>
-    							</tr>
-    							<tr>
-    								<td class="no-line"></td>
-    								<td class="no-line"></td>
-    								<td class="no-line text-center"><strong>Shipping</strong></td>
-    								<td class="no-line text-right">$15</td>
-    							</tr>
-    							<tr>
     								<td class="no-line"></td>
     								<td class="no-line"></td>
     								<td class="no-line text-center"><strong>Total</strong></td>
-    								<td class="no-line text-right">$</td>
-    							</tr>
+    								<td class="no-line text-right">${{total_temp_invoice}}</td>
+                  </tr>
+                  <tr>
+                    <td class="no-line"></td>
+                    <td class="no-line"></td>
+                  	<td class="no-line text-right"><button class="btn btn-xs btn-success confirm"><i class="fa fa-check"></i>Confirm</button></td>
+                    <td><button class="btn btn-xs btn-default cancel"><i class="fa fa-trash-o"></i>Cancel</button></td>
+                  </tr>
     						</tbody>
     					</table>
     				</div>
@@ -140,4 +134,5 @@
 </div>
 </section>
 <div class="clear-top"></div>
+{{> restuarant_confirmOrder }}
 </template>

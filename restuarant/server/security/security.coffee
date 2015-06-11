@@ -15,3 +15,9 @@ Restuarant.Collection.Product.permit([
 	'update'
 	'remove'
 ]).restuarant_ifGeneral().apply()
+
+Restuarant.Collection.TempProduct.permit([
+  'insert'
+  'update'
+  'remove'
+]).restuarant_ifGeneral().apply()

@@ -6,4 +6,7 @@ Restuarant.Schema.OrderTable = new SimpleSchema(
     max: 20
 )
 
+Restuarant.Collection.OrderTable.before.insert (userId, doc) ->
+  doc._id = doc.name
+
 Restuarant.Collection.OrderTable.attachSchema Restuarant.Schema.OrderTable
