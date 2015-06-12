@@ -2,9 +2,10 @@ AutoForm.hooks
   restuarant_confirmOrder:
     before:
       insert: (doc) ->
-        dateTime = moment(new Date()).format('YYYY-MM-DD hh:mm:ss a')
+        dateTime = moment(new Date()).format('HH:mm:ss-YYYYMMDD')
         doc.tableNumber = doc.invoiceId
-        doc.invoiceId = "0#{doc.invoiceId}-#{dateTime}"
+        prefix= "#{doc.invoiceId}-#{dateTime}"
+        doc.invoiceId = idGenerator.genWithPrefix(Restuarant.Collection.Invoice, prefix, 3, "invoiceId" )
         doc
     onSuccess: (formType, result) ->
       alertify.success 'Successfully'

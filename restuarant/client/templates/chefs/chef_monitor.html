@@ -1,43 +1,68 @@
 <template name="restuarant_chef">
+  {{> list_invoices}}
+</template>
+<template name="list_invoices">
   <div class="container">
   	<div class="row">
   		<div class="timeline-centered">
     {{#each invoices}}
       {{#if isEven index}}
-  	<article class="timeline-entry">
+      	<article class="timeline-entry">
 
-  		<div class="timeline-entry-inner">
-  			<time class="timeline-time"><span>{{format createdAt}}</span> <span>Today</span></time>
+          <div class="timeline-entry-inner">
+            <time class="timeline-time"><span>{{format createdAt}}</span> <span>{{livestamp createdAt}}</span></time>
 
-  			<div class="timeline-icon bg-success">
-  				<i class="entypo-feather"></i>
-  			</div>
+            <div class="timeline-icon bg-secondary">
+              <i class="entypo-feather"></i>
+            </div>
 
-  			<div class="timeline-label">
-  				<h2><a href="#">{{Art Ramadani}}</a> <span>posted a status update</span></h2>
-  				<p>Tolerably earnestly middleton extremely distrusts she boy now not. Add and offered prepare how cordial two promise. Greatly who affixed suppose but enquire compact prepare all put. Added forth chief trees but rooms think may.</p>
-  			</div>
-  		</div>
+            <div class="timeline-label">
+              <h2><a href="#">Table #{{tableNumber}}</a> <span>Invoice ID:{{invoiceId}}</span>&nbsp;<input type="checkbox" name="done" class="done"></h2>
+              <p>
+                <ul class="list-unstyle">
+                    {{#each product}}
+                    <li class="finished">
+                      {{name}}({{amount}})&emsp;<input type="checkbox" name="check" class="check">
+                    </li>
+                    {{/each}}
+                </ul>
+              </p>
+              <p>
+                Order by: {{createdBy}}
+              </p>
+            </div>
+          </div>
+      	</article> <!-- end article -->
 
-  	</article>
-      {{/if}}
-      {{#if isOdd index}}
-      
+      {{else}}
+
+
 
   	<article class="timeline-entry left-aligned">
 
-  		<div class="timeline-entry-inner">
-  			<time class="timeline-time" datetime="2014-01-10T03:45"><span>03:45 AM</span> <span>Today</span></time>
+      <div class="timeline-entry-inner">
+        <time class="timeline-time"><span>{{format createdAt}}</span> <span>{{livestamp createdAt}}</span></time>
 
-  			<div class="timeline-icon bg-secondary">
-  				<i class="entypo-suitcase"></i>
-  			</div>
+        <div class="timeline-icon bg-info">
+          <i class="entypo-feather"></i>
+        </div>
 
-  			<div class="timeline-label">
-  				<h2><a href="#">Job Meeting</a></h2>
-  				<p>You have a meeting at <strong>Laborator Office</strong> Today.</p>
-  			</div>
-  		</div>
+        <div class="timeline-label">
+          <h2><a href="#">Table #{{tableNumber}}</a> <span>Invoice ID:{{invoiceId}}</span>&nbsp;<input type="checkbox" name="done" class="done"></h2>
+          <p>
+            <ul class="list-unstyle">
+                {{#each product}}
+                <li class="finished">
+                  {{name}}({{amount}})&emsp;<input type="checkbox" name="check" class="check">
+                </li>
+                {{/each}}
+            </ul>
+          </p>
+          <p>
+            Order by: {{createdBy}}
+          </p>
+        </div>
+      </div>
 
   	</article>
       {{/if}}
