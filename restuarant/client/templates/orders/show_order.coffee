@@ -34,16 +34,9 @@ addToForm = () ->
 	$('[name="total"]').val($('#total').text())
 	$('.btn-delete').addClass('hidden')
 	$('.confirm').removeClass('hidden')
+	$('.cancel').addClass('hidden')
 	alertify.success 'Successfully added'
-clearForm = () ->
-	$('[name="total"]').val('')
-	$('[name="invoiceId"]').val('')
-	products = Session.get 'temp_products'
-	$.each products, (index, product) ->
-		$('.autoform-remove-item').click()
-	$('.autoform-add-item').click()
-	confirmOrderformField(0, '')
-	alertify.warning 'Successfully cancel'
+
 Template.restuarant_showOrder.events
   'click .timeline-panel': (e)->
     obj = $(e.currentTarget)
@@ -99,11 +92,11 @@ Template.restuarant_showOrder.events
 		fetchTempProducts()
 
 	'click .cancel': ->
-		clearForm()
 		Meteor.call('removeTempProduct', Meteor.user()._id)
 		fetchTempProducts()
 	'click .confirm': ->
 		$('.confirm-invoice').trigger('click')
+		$('.cancel').removeClass('hidden')
 		Meteor.call 'removeTempProduct', Meteor.user()._id
 		fetchTempProducts()
 	'click .add-to-invoice': ->
