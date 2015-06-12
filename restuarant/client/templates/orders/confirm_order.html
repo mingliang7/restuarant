@@ -1,8 +1,10 @@
 <template name="restuarant_confirmOrder">
+  <div class="hidden">
   {{#autoForm collection="Restuarant.Collection.Invoice" id="restuarant_confirmOrder" type="insert"}}
     {{> afQuickField name="invoiceId"}}
     {{> afQuickField name="product" }}
     {{> afQuickField name="total"}}
-    <button type="submit" class="btn btn-primary">Save</button>
+    <button type="submit" class="btn btn-primary confirm-invoice">Save</button>
   {{/autoForm}}
+</div>
 </template>

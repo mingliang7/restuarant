@@ -21,3 +21,9 @@ Restuarant.Collection.TempProduct.permit([
   'update'
   'remove'
 ]).restuarant_ifGeneral().apply()
+
+Restuarant.Collection.Invoice.permit([
+  'insert'
+  'update'
+  'remove'
+]).restuarant_ifGeneral().apply()

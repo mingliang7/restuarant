@@ -1,7 +1,7 @@
 <template name="restuarant_showOrder">
   <div class="col-md-12">
     <div class="col-md-4"></div>
-    <div class="col-md-4 orang-bg" align="center" ><h4><i class="fa fa-tablet"></i> Table #{{this.name}} </h4></div>
+    <div class="col-md-4 orang-bg" align="center" ><h4><i class="fa fa-tablet"></i> Table #<span  id="table-number">{{this.name}}</span> </h4></div>
     <div class="col-md-4"></div>
   </div>
   <div class="col-md-12">
@@ -106,19 +106,19 @@
       								<td class="text-center">${{price}}</td>
       								<td class="text-center">{{amount}}</td>
       								<td class="text-right">${{total_unit_price}}</td>
-                      <td class="text-center"><button class="btn btn-xs btn-danger delete">x</button></td>
+                      <td class="text-center btn-delete"><button class="btn btn-xs btn-danger delete">x</button></td>
       							</tr>
                   {{/each}}
     							<tr>
     								<td class="no-line"></td>
     								<td class="no-line"></td>
     								<td class="no-line text-center"><strong>Total</strong></td>
-    								<td class="no-line text-right">${{total_temp_invoice}}</td>
+    								<td class="no-line text-right" >$<span id="total">{{total_temp_invoice}}</span></td>
                   </tr>
                   <tr>
                     <td class="no-line"></td>
-                    <td class="no-line"></td>
-                  	<td class="no-line text-right"><button class="btn btn-xs btn-success confirm"><i class="fa fa-check"></i>Confirm</button></td>
+                  	<td class="no-line text-right"><button class="btn btn-xs btn-success confirm hidden"><i class="fa fa-check"></i>Confirm</button></td>
+                    <td class="no-line text-right"><button class="btn btn-xs btn-primary add-to-invoice"><i class="fa fa-plus"></i>Add to Invoice</button></td>
                     <td><button class="btn btn-xs btn-default cancel"><i class="fa fa-trash-o"></i>Cancel</button></td>
                   </tr>
     						</tbody>

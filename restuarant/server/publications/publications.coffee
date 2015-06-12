@@ -12,3 +12,6 @@ Meteor.publish 'restuarant_product', ->
 
 Meteor.publish 'restuarant_temp_product', ->
 	Restuarant.Collection.TempProduct.find() if @userId
+
+Meteor.publish 'restuarant_order_invoice', ->
+	Restuarant.Collection.TempProduct.find() if @userId

@@ -44,8 +44,7 @@ Restuarant.Schema.Invoice = new SimpleSchema(
   updatedBy:
     type: String
     autoValue: ->
-      if @isUpdate
-        Meteor.user().username
+      Meteor.user().username
 
   createdAt:
     type: Date
@@ -57,8 +56,7 @@ Restuarant.Schema.Invoice = new SimpleSchema(
     type: Date
     optional: true
     autoValue: ->
-      if @isUpdate
-        new Date()
+      new Date()
 )
 
 Restuarant.Collection.Invoice.attachSchema Restuarant.Schema.Invoice
