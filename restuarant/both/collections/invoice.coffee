@@ -28,6 +28,9 @@ Restuarant.Schema.Invoice = new SimpleSchema(
   total:
     type: Number
     decimal: true
+  
+  tableNumber: 
+    type: String
 
   userId:
     type: String
