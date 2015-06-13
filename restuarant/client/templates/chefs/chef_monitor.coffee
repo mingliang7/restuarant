@@ -10,11 +10,16 @@ Template.list_invoices.helpers
 		moment(createdAt).format('hh:mm a')
 Template.list_invoices.events
 	'change .check': (event) ->
+		value = @
 		element = $(event.currentTarget)
+		id = element.parents('p.invoiceId').find('.id').val()
 		value = element.prop('checked')
-		element.parents('li.finished').addClass('delete-mark') if value is yes
-		element.parents('li.finished').removeClass('delete-mark') if value is no
-
+		if value is yes
+			element.parents('li.finished').addClass('delete-mark')
+			Restuarant.Collection.Invoice.update({_id: id,'product.name': "#{value.name}"}, {$set: {'product.$.cooked': true}})
+		else
+			element.parents('li.finished').removeClass('delete-mark')
+			Restuarant.Collection.Invoice.update({_id: id,'product.name': "#{value.name}"}, {$set: {'product.$.cooked': true}})
 	'change .done': (event) ->
 		current = @invoiceId
 		element = $(event.currentTarget)

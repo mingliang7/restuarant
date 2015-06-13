@@ -18,11 +18,12 @@
 
             <div class="timeline-label">
               <h2><a href="#">Table #{{tableNumber}}</a> <span>Invoice ID:{{invoiceId}}</span>&nbsp;<input type="checkbox" name="done" class="done"></h2>
-              <p>
+              <p class="invoiceId">
+                <input type="hidden" class="id" value="{{_id}}">
                 <ul class="list-unstyle">
                     {{#each product}}
                     <li class="finished">
-                      {{name}}({{amount}})&emsp;<input type="checkbox" name="check" class="check">
+                      {{name}}({{amount}})&emsp;<input type="checkbox" name="check" class="check" checked="{{cooked}}">
                     </li>
                     {{/each}}
                 </ul>

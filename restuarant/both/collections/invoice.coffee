@@ -25,11 +25,15 @@ Restuarant.Schema.Invoice = new SimpleSchema(
     type: Number
     decimal: true
 
+  'product.$.cooked':
+    type: Boolean
+    defaultValue: false
+
   total:
     type: Number
     decimal: true
-  
-  tableNumber: 
+
+  tableNumber:
     type: String
 
   userId:
@@ -37,6 +41,11 @@ Restuarant.Schema.Invoice = new SimpleSchema(
     autoValue: ->
       if @isInsert || @isUpdate
         Meteor.user()._id
+
+  archived:
+    type: Boolean
+    defaultValue: false
+
 
   createdBy:
     type: String
