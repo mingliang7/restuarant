@@ -17,12 +17,18 @@
             </div>
 
             <div class="timeline-label">
-              <h2><a href="#">Table #{{tableNumber}}</a> <span>Invoice ID:{{invoiceId}}</span>&nbsp;<input type="checkbox" name="done" class="done"></h2>
+              <h2><a href="#">Table #{{tableNumber}}</a> <span>Invoice ID:{{invoiceId}}</span>&nbsp;<input type="checkbox" name="done" class="done" checked="{{completed _id}}"></h2>
+              <div class="progress">
+                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {{progress _id}}%;">
+                  60%
+                </div>
+              </div>
+
               <p class="invoiceId">
                 <input type="hidden" class="id" value="{{_id}}">
                 <ul class="list-unstyle">
                     {{#each product}}
-                    <li class="finished">
+                    <li class="finished {{#if cooked}}delete-mark{{/if}}">
                       {{name}}({{amount}})&emsp;<input type="checkbox" name="check" class="check" checked="{{cooked}}">
                     </li>
                     {{/each}}
@@ -49,12 +55,19 @@
         </div>
 
         <div class="timeline-label">
-          <h2><a href="#">Table #{{tableNumber}}</a> <span>Invoice ID:{{invoiceId}}</span>&nbsp;<input type="checkbox" name="done" class="done"></h2>
-          <p>
+          <h2><a href="#">Table #{{tableNumber}}</a> <span>Invoice ID:{{invoiceId}}</span>&nbsp;<input type="checkbox" name="done" class="done" checked="{{completed _id}}"></h2>
+          <div class="progress">
+            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {{progress _id}}%;">
+              60%
+            </div>
+          </div>
+
+          <p class="invoiceId">
+            <input type="hidden" class="id" value="{{_id}}">
             <ul class="list-unstyle">
                 {{#each product}}
-                <li class="finished">
-                  {{name}}({{amount}})&emsp;<input type="checkbox" name="check" class="check">
+                <li class="finished {{#if cooked}}delete-mark{{/if}}">
+                  {{name}}({{amount}})&emsp;<input type="checkbox" name="check" class="check" checked="{{cooked}}">
                 </li>
                 {{/each}}
             </ul>
@@ -64,7 +77,6 @@
           </p>
         </div>
       </div>
-
   	</article>
       {{/if}}
     {{/each}}

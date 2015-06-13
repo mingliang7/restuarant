@@ -8,25 +8,45 @@ Template.list_invoices.helpers
 		index % 2 is 0
 	format: (createdAt) ->
 		moment(createdAt).format('hh:mm a')
+	progress: (id) ->
+		#unCooked = Restuarant.Collection.Invoice.find({_id: id, 'product.cooked': false}).count()
+		cooked = Restuarant.Collection.Invoice.findOne({_id: id})
+		total_cooked = 0
+		if cooked isnt undefined
+			cooked.product.forEach (product) ->
+				if product.cooked is true
+					total_cooked += 1
+		total = cooked.product.length
+		(total_cooked * 100)/total
+	completed: (id) ->
+	#unCooked = Restuarant.Collection.Invoice.find({_id: id, 'product.cooked': false}).count()
+		cooked = Restuarant.Collection.Invoice.findOne({_id: id})
+		total_cooked = 0
+		if cooked isnt undefined
+					debugger
+			cooked.product.forEach (product) ->
+				if product.cooked is true
+					total_cooked += 1
+		total = cooked.product.length
+		result = (total_cooked * 100)/total
+		result is 100
 Template.list_invoices.events
 	'change .check': (event) ->
-		value = @
 		element = $(event.currentTarget)
 		id = element.parents('p.invoiceId').find('.id').val()
 		value = element.prop('checked')
+
 		if value is yes
-			element.parents('li.finished').addClass('delete-mark')
-			Restuarant.Collection.Invoice.update({_id: id,'product.name': "#{value.name}"}, {$set: {'product.$.cooked': true}})
+			Meteor.call 'setCooked', id, @name
 		else
-			element.parents('li.finished').removeClass('delete-mark')
-			Restuarant.Collection.Invoice.update({_id: id,'product.name': "#{value.name}"}, {$set: {'product.$.cooked': true}})
+			Meteor.call 'unsetCooked', id, @name
+
 	'change .done': (event) ->
 		current = @invoiceId
 		element = $(event.currentTarget)
 		value = element.prop('checked')
+
 		if value is yes
-			element.parents('.timeline-entry').find(".check").prop('checked', true)
-			element.parents('.timeline-entry').find("li.finished").addClass('delete-mark')
+			Meteor.call 'setAllCooked', @_id
 		else
-			element.parents('.timeline-entry').find(".check").prop('checked', false)
-			element.parents('.timeline-entry').find("li.finished").removeClass('delete-mark')
+			Meteor.call 'unSetAllCooked', @_id
