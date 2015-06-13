@@ -1,4 +1,3 @@
-
 confirmOrderformField = (index, product)->
 	name = '[name="product.' + index + '.name"]'
 	price = '[name="product.' + index + '.price"]'
@@ -18,7 +17,8 @@ fetchTempProducts = ->
 
 addToForm = () ->
 	products = Session.get 'temp_products'
-	if products isnt undefined
+	cancel_products_length = Session.get 'cancel_form'
+	if products isnt undefined && (cancel_products_length is undefined || cancel_products_length is null)
 		$('[name="invoiceId"]').val($('#table-number').text())
 		$.each products, (index, product) ->
 			if index is 0
@@ -30,20 +30,41 @@ addToForm = () ->
 						confirmOrderformField(index, product)
 					500
 				)
-				# confirmOrderformField(index, product)
+	else if products isnt undefined && cancel_products_length isnt null
+		old_index = cancel_products_length
+		$('[name="invoiceId"]').val($('#table-number').text())
+		$.each products, (index, product) ->
+			last_first_index = old_index
+			last_index = index + old_index
+			if last_index is last_first_index
+				confirmOrderformField(old_index, product)
+			else
+				$('.autoform-add-item').click()
+				setTimeout(
+					->
+						confirmOrderformField(last_index, product)
+					500
+				)
+
+		Session.set 'cancel_form', null
 	$('[name="total"]').val($('#total').text())
 	$('.btn-delete').addClass('hidden')
 	$('.confirm').removeClass('hidden')
 	alertify.success 'Successfully added'
+
 clearForm = () ->
+	products = Session.get 'temp_products'
+	old_products = Session.get 'old_products'
+	Session.set 'old_products',  old_products + products.length #sum old_products length together
+	console.log Session.get 'old_products'
 	$('[name="total"]').val('')
 	$('[name="invoiceId"]').val('')
-	products = Session.get 'temp_products'
 	$.each products, (index, product) ->
 		$('.autoform-remove-item').click()
 	$('.autoform-add-item').click()
-	confirmOrderformField(0, '')
+	Session.set 'cancel_form', Session.get 'old_products'
 	alertify.warning 'Successfully cancel'
+
 Template.restuarant_showOrder.events
   'click .timeline-panel': (e)->
     obj = $(e.currentTarget)
@@ -54,7 +75,7 @@ Template.restuarant_showOrder.getCategories = (category) ->
 
 Template.restuarant_showOrder.onRendered ->
 	Meteor.call 'removeTempProduct', Meteor.user()._id
-
+	Session.set 'old_products', 0
 Template.restuarant_showOrder.helpers
 	categories: () ->
 		lists = []
@@ -102,9 +123,13 @@ Template.restuarant_showOrder.events
 		clearForm()
 		Meteor.call('removeTempProduct', Meteor.user()._id)
 		fetchTempProducts()
+		$('.add-to-invoice').attr('disabled', false)
 	'click .confirm': ->
 		$('.confirm-invoice').trigger('click')
 		Meteor.call 'removeTempProduct', Meteor.user()._id
 		fetchTempProducts()
+		Session.set 'old_products', 0 #set old product length to 0
+		$('.add-to-invoice').attr('disabled', false)
 	'click .add-to-invoice': ->
 		addToForm()
+		$('.add-to-invoice').attr('disabled', true)
