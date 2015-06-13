@@ -50,7 +50,6 @@ addToForm = () ->
 	$('[name="total"]').val($('#total').text())
 	$('.btn-delete').addClass('hidden')
 	$('.confirm').removeClass('hidden')
-	$('.cancel').addClass('hidden')
 	alertify.success 'Successfully added'
 
 clearForm = () ->
@@ -77,6 +76,7 @@ Template.restuarant_showOrder.getCategories = (category) ->
 Template.restuarant_showOrder.onRendered ->
 	Meteor.call 'removeTempProduct', Meteor.user()._id
 	Session.set 'old_products', 0
+	
 Template.restuarant_showOrder.helpers
 	categories: () ->
 		lists = []
@@ -103,6 +103,7 @@ Template.restuarant_showOrder.helpers
 		products.forEach (product) ->
 			total += product.total_unit_price
 		total
+
 Template.restuarant_showOrder.events
 	'click .product': ->
 		currentProduct = @
@@ -115,22 +116,25 @@ Template.restuarant_showOrder.events
 		else
 			Restuarant.Collection.TempProduct.update({_id: product._id},{$set:{amount: product.amount += 1, total_unit_price: product.total_unit_price += product.price}})
 		fetchTempProducts()
+
 	'click .delete': ->
 		currentProduct  = @
 		Restuarant.Collection.TempProduct.remove(currentProduct._id)
 		fetchTempProducts()
 
 	'click .cancel': ->
+		clearForm()
 		Meteor.call('removeTempProduct', Meteor.user()._id)
 		fetchTempProducts()
 		$('.add-to-invoice').attr('disabled', false)
+
 	'click .confirm': ->
 		$('.confirm-invoice').trigger('click')
-		$('.cancel').removeClass('hidden')
 		Meteor.call 'removeTempProduct', Meteor.user()._id
 		fetchTempProducts()
 		Session.set 'old_products', 0 #set old product length to 0
 		$('.add-to-invoice').attr('disabled', false)
+
 	'click .add-to-invoice': ->
 		addToForm()
 		$('.add-to-invoice').attr('disabled', true)
