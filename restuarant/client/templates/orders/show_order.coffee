@@ -50,6 +50,7 @@ addToForm = () ->
 	$('[name="total"]').val($('#total').text())
 	$('.btn-delete').addClass('hidden')
 	$('.confirm').removeClass('hidden')
+	$('.cancel').addClass('hidden')
 	alertify.success 'Successfully added'
 
 clearForm = () ->
@@ -120,12 +121,12 @@ Template.restuarant_showOrder.events
 		fetchTempProducts()
 
 	'click .cancel': ->
-		clearForm()
 		Meteor.call('removeTempProduct', Meteor.user()._id)
 		fetchTempProducts()
 		$('.add-to-invoice').attr('disabled', false)
 	'click .confirm': ->
 		$('.confirm-invoice').trigger('click')
+		$('.cancel').removeClass('hidden')
 		Meteor.call 'removeTempProduct', Meteor.user()._id
 		fetchTempProducts()
 		Session.set 'old_products', 0 #set old product length to 0
